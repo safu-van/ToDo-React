@@ -1,0 +1,30 @@
+.todo-top {
+    margin-bottom: 3rem;
+}
+
+.todo-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.add-todo {
+    padding-left: 15rem;
+    padding-right: 15rem;
+}
+
+.todo-body {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.todo-box {
+    padding: 10px;
+    flex: 1;
+    margin-top: 3rem;
+}
+
+.todo-box.active-todo {
+    margin-top: 0;
+    flex: 1.5;
+}

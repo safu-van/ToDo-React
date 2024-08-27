@@ -1,0 +1,48 @@
+.active-todo-outer {
+    color: white;
+    border-radius: 5px;
+}
+
+.active-todo-heading {
+    background: #3D4EED;
+    height: 30%;
+    text-align: center;
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.active-todo-body {
+    background: rgb(255, 255, 255);
+    height: 70%;
+    min-height: 25rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+}
+
+.todo-div {
+    height: 30px;
+    background: #3D4EED;
+    border-radius: 3px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.todo-text {
+    font-size: small;
+    width: 80%;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+
+.icons span {
+    margin-left: 8px;
+    cursor: pointer;
+}
