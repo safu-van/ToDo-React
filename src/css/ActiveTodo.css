@@ -4,7 +4,7 @@
 }
 
 .active-todo-heading {
-    background: #3D4EED;
+    background: #3498DB;
     height: 30%;
     text-align: center;
     padding: 8px;
@@ -23,7 +23,7 @@
 
 .todo-div {
     height: 30px;
-    background: #3D4EED;
+    background: #3498DB;
     border-radius: 3px;
     padding: 5px;
     display: flex;
