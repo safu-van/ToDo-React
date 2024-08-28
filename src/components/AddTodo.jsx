@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +10,6 @@ function AddTodo({ todos, setTodos }) {
   const inputOnChange = (event) => setInputText(event.target.value);
 
   const addTodo = () => {
-
     // to check whether the input is empty or not
     const trimmedText = inputText.trim();
     if (trimmedText === "") {
@@ -35,9 +34,6 @@ function AddTodo({ todos, setTodos }) {
       isRemoved: false
     };
     setTodos([...todos, newTodo]);
-
-    // add todos state to local storage
-    localStorage.setItem("todos", JSON.stringify(todos));
 
     // to clear the input box after adding the todo
     setInputText("");

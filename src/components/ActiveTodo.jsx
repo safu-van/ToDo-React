@@ -4,7 +4,30 @@ import { LuPencil } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa6";
 
-function ActiveTodo({ todos }) {
+function ActiveTodo({ todos, setTodos }) {
+
+    const activeTodos = todos.filter((todo_obj) => !todo_obj.isCompleted && !todo_obj.isRemoved);
+
+    const removeTodo = (id) => {
+        const updatedTodos = todos.map((todo_obj) => {
+            if (todo_obj.id === id) {
+                return { ...todo_obj, isRemoved: true };
+            }
+            return todo_obj; 
+        });
+        setTodos(updatedTodos);
+    }
+
+    const completedTodo = (id) => {
+        const updatedTodos = todos.map((todo_obj) => {
+            if (todo_obj.id === id) {
+                return { ...todo_obj, isCompleted: true };
+            }
+            return todo_obj; 
+        });
+        setTodos(updatedTodos);
+    }
+
     return (
         <div className='active-todo-outer'>
             <div className='active-todo-heading'>
@@ -12,7 +35,7 @@ function ActiveTodo({ todos }) {
             </div>
             <div className='active-todo-body'>
                 {
-                    todos && todos.map((todo_obj) => {
+                    activeTodos && activeTodos.map((todo_obj) => {
                         return (
                             <div key={todo_obj.id} className='todo-div'>
                                 <div className='todo-text'>
@@ -20,17 +43,16 @@ function ActiveTodo({ todos }) {
                                 </div>
                                 <div className='icons'>
                                     <span><LuPencil size='13px' /></span>
-                                    <span><RxCross2 size='17px' /></span>
-                                    <span><FaCheck size='15px' /></span>
+                                    <span onClick={() => removeTodo(todo_obj.id)}><RxCross2 size='17px' /></span>
+                                    <span onClick={() => completedTodo(todo_obj.id)}><FaCheck size='15px' /></span>
                                 </div>
                             </div>
                         );
                     })
                 }
-
             </div>
         </div>
     )
 }
 
-export default ActiveTodo
+export default ActiveTodo;

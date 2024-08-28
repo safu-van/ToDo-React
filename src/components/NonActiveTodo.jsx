@@ -11,7 +11,7 @@ function NonActiveTodo({ heading, todos }) {
                 {
                     todos && todos.map((todo_obj) => {
                         return (
-                            <div className='todo-div'>
+                            <div key={todo_obj.id} className='todo-div'>
                                 <div className='todo-text'>
                                     <span>{todo_obj.todo}</span>
                                 </div>

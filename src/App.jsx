@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
@@ -7,13 +7,17 @@ import ActiveTodo from './components/ActiveTodo'
 import AddTodo from './components/AddTodo'
 
 function App() {
-  
+
   const [todos, setTodos] = useState(() => {
     return JSON.parse(localStorage.getItem("todos")) || [];
   });
-  const activeTodos = todos.filter((todo_obj) => todo_obj.isCompleted === false && todo_obj.isRemoved === false)
-  const completedTodos = todos.filter((todo_obj) => todo_obj.isCompleted)
-  const removedTodos = todos.filter((todo_obj) => todo_obj.isRemoved)
+  
+  const completedTodos = todos.filter((todo_obj) => todo_obj.isCompleted);
+  const removedTodos = todos.filter((todo_obj) => todo_obj.isRemoved);
+  
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div>
@@ -31,7 +35,7 @@ function App() {
           <NonActiveTodo heading={'Removed Todos'} todos={removedTodos} />
         </div>
         <div className='todo-box active-todo'>
-          <ActiveTodo todos={activeTodos} />
+          <ActiveTodo todos={todos} setTodos={setTodos} />
         </div>
         <div className='todo-box'>
           <NonActiveTodo heading={'Completed Todos'} todos={completedTodos} />
