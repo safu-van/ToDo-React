@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../css/AddTodo.css';
 
+
 function AddTodo({ todos, setTodos }) {
 
   const [inputText, setInputText] = useState("");
-  const inputOnChange = (event) => setInputText(event.target.value);
 
   const addTodo = () => {
     const trimmedText = inputText.trim();
@@ -49,7 +49,7 @@ function AddTodo({ todos, setTodos }) {
             type="text"
             placeholder='Enter your todo...'
             value={inputText}
-            onChange={inputOnChange}
+            onChange={(event) => setInputText(event.target.value)}
           />
           <button className='add-button' onClick={addTodo}>+</button>
         </div>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import '../css/ActiveTodo.css'
 import { LuPencil } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../css/ActiveTodo.css'
+
 
 function ActiveTodo({ todos, setTodos }) {
 

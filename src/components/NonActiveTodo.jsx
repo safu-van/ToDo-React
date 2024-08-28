@@ -1,6 +1,7 @@
 import React from 'react'
 import '../css/NonActiveTodo.css'
 
+
 function NonActiveTodo({ heading, todos }) {
     return (
         <div className='non-active-todo-outer'>
