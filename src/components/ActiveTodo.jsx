@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/ActiveTodo.css'
 import { LuPencil } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
@@ -7,13 +7,31 @@ import { FaCheck } from "react-icons/fa6";
 function ActiveTodo({ todos, setTodos }) {
 
     const activeTodos = todos.filter((todo_obj) => !todo_obj.isCompleted && !todo_obj.isRemoved);
+    const [updateTodoId, setUpdateTodoId] = useState(null)
+    const [inputText, setInputText] = useState("")
+
+    const updateTodoConfig = (id, text) => {
+        setUpdateTodoId(id)
+        setInputText(text)
+    }
+
+    const saveTodoUpdate = () => {
+        const updatedTodos = todos.map((todo_obj) => {
+            if (todo_obj.id === updateTodoId) {
+                return { ...todo_obj, todo: inputText };
+            }
+            return todo_obj;
+        });
+        setTodos(updatedTodos);
+        setUpdateTodoId(null)
+    }
 
     const removeTodo = (id) => {
         const updatedTodos = todos.map((todo_obj) => {
             if (todo_obj.id === id) {
                 return { ...todo_obj, isRemoved: true };
             }
-            return todo_obj; 
+            return todo_obj;
         });
         setTodos(updatedTodos);
     }
@@ -23,7 +41,7 @@ function ActiveTodo({ todos, setTodos }) {
             if (todo_obj.id === id) {
                 return { ...todo_obj, isCompleted: true };
             }
-            return todo_obj; 
+            return todo_obj;
         });
         setTodos(updatedTodos);
     }
@@ -39,13 +57,26 @@ function ActiveTodo({ todos, setTodos }) {
                         return (
                             <div key={todo_obj.id} className='todo-div'>
                                 <div className='todo-text'>
-                                    <span>{todo_obj.todo}</span>
+                                    {
+                                        updateTodoId === todo_obj.id ? (
+                                            <input className='todo-update-input' type='text' value={inputText} onChange={(event) => setInputText(event.target.value)} />
+                                        ) : (
+                                            <span>{todo_obj.todo}</span>
+                                        )
+                                    }
                                 </div>
-                                <div className='icons'>
-                                    <span><LuPencil size='13px' /></span>
-                                    <span onClick={() => removeTodo(todo_obj.id)}><RxCross2 size='17px' /></span>
-                                    <span onClick={() => completedTodo(todo_obj.id)}><FaCheck size='15px' /></span>
-                                </div>
+                                {
+                                    updateTodoId === todo_obj.id ? (
+                                        <button className='todo-update-button' onClick={saveTodoUpdate} >update</button>
+                                    ) : (
+                                        <div className='icons'>
+                                            <span onClick={() => updateTodoConfig(todo_obj.id, todo_obj.todo)}><LuPencil size='13px' /></span>
+                                            <span onClick={() => removeTodo(todo_obj.id)}><RxCross2 size='17px' /></span>
+                                            <span onClick={() => completedTodo(todo_obj.id)}><FaCheck size='15px' /></span>
+                                        </div>
+                                    )
+                                }
+
                             </div>
                         );
                     })

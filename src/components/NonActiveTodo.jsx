@@ -5,7 +5,7 @@ function NonActiveTodo({ heading, todos }) {
     return (
         <div className='non-active-todo-outer'>
             <div className='non-active-todo-heading'>
-                <span>{ heading }</span>
+                <span>{heading}</span>
             </div>
             <div className='non-active-todo-body'>
                 {

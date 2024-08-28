@@ -10,14 +10,12 @@ function AddTodo({ todos, setTodos }) {
   const inputOnChange = (event) => setInputText(event.target.value);
 
   const addTodo = () => {
-    // to check whether the input is empty or not
     const trimmedText = inputText.trim();
     if (trimmedText === "") {
       toast.error("Todo cannot be empty!");
       return;
     }
 
-    // to check whether the todo already exists or not
     const duplicateTodo = todos.find(
       (todo_obj) => todo_obj.todo.toLowerCase() === trimmedText.toLowerCase()
     );
@@ -26,7 +24,6 @@ function AddTodo({ todos, setTodos }) {
       return;
     }
 
-    // add new todo to the todos state
     const newTodo = {
       id: uuidv4(),
       todo: trimmedText,
@@ -35,7 +32,6 @@ function AddTodo({ todos, setTodos }) {
     };
     setTodos([...todos, newTodo]);
 
-    // to clear the input box after adding the todo
     setInputText("");
 
     toast.success("Todo added successfully!");
