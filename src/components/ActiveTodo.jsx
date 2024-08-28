@@ -3,6 +3,8 @@ import '../css/ActiveTodo.css'
 import { LuPencil } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa6";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ActiveTodo({ todos, setTodos }) {
 
@@ -16,6 +18,20 @@ function ActiveTodo({ todos, setTodos }) {
     }
 
     const saveTodoUpdate = () => {
+        const trimmedText = inputText.trim();
+        if (trimmedText === "") {
+            toast.error("Todo cannot be empty!");
+            return;
+        }
+
+        const duplicateTodo = activeTodos.find(
+            (todo_obj) => todo_obj.todo.toLowerCase() === trimmedText.toLowerCase() && todo_obj.id !== updateTodoId
+        );
+        if (duplicateTodo) {
+            toast.error("Todo already exists!");
+            return;
+        }
+
         const updatedTodos = todos.map((todo_obj) => {
             if (todo_obj.id === updateTodoId) {
                 return { ...todo_obj, todo: inputText };
@@ -23,6 +39,7 @@ function ActiveTodo({ todos, setTodos }) {
             return todo_obj;
         });
         setTodos(updatedTodos);
+
         setUpdateTodoId(null)
     }
 

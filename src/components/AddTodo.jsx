@@ -16,7 +16,8 @@ function AddTodo({ todos, setTodos }) {
       return;
     }
 
-    const duplicateTodo = todos.find(
+    const activeTodos = todos.filter((todo_obj) => !todo_obj.isCompleted && !todo_obj.isRemoved);
+    const duplicateTodo = activeTodos.find(
       (todo_obj) => todo_obj.todo.toLowerCase() === trimmedText.toLowerCase()
     );
     if (duplicateTodo) {
