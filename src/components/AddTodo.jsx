@@ -1,7 +1,42 @@
-import React from 'react'
-import '../css/AddTodo.css'
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../css/AddTodo.css';
 
 function AddTodo() {
+  const [inputText, setInputText] = useState("");
+  const inputOnChange = (event) => setInputText(event.target.value);
+
+  const addTodo = () => {
+    const trimmedText = inputText.trim();
+    
+    if (trimmedText === "") {
+      toast.error("Todo cannot be empty!");
+      return;
+    }
+
+    const todos = JSON.parse(localStorage.getItem("todos")) || [];
+    const duplicateTodo = todos.find((todo_obj) => todo_obj.todo.toLowerCase() === trimmedText.toLowerCase());
+
+    if (duplicateTodo) {
+      toast.error("Todo already exists!");
+      return;
+    }
+
+    const newTodo = {
+      id: uuidv4(),
+      todo: trimmedText,
+      isCompleted: false,
+      isRemoved: false
+    };
+
+    todos.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    setInputText("");
+    toast.success("Todo added successfully!");
+  };
+
   return (
     <div className='add-todo-outer'>
       <div className='add-todo-inner1'>
@@ -9,13 +44,17 @@ function AddTodo() {
       </div>
       <div className='add-todo-inner2'>
         <div className='input-container'>
-          <input type="text" placeholder='Enter your todo...' />
-          <button className='add-button'>+</button>
+          <input 
+            type="text" 
+            placeholder='Enter your todo...' 
+            value={inputText} 
+            onChange={inputOnChange} 
+          />
+          <button className='add-button' onClick={addTodo}>+</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-
-export default AddTodo
+export default AddTodo;
