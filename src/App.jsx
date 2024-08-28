@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 import NonActiveTodo from './components/NonActiveTodo'
 import ActiveTodo from './components/ActiveTodo'
@@ -7,6 +9,7 @@ import AddTodo from './components/AddTodo'
 function App() {
   return (
     <div>
+      <ToastContainer />
       <div className='todo-top'>
         <div className='todo-heading'>
           <h4>ToDo App</h4>
