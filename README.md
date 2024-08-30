@@ -1,3 +1,3 @@
 # ToDo App
 
-This is a ToDo App which is builded using ReactJS.
+This is a ToDo App built using ReactJS.
