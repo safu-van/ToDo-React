@@ -1,10 +1,12 @@
 .active-todo-outer {
+    border: 1px solid #003161;
+    box-shadow: 0px 4px 8px rgba(0, 49, 97, 0.2);
     color: white;
     border-radius: 5px;
 }
 
 .active-todo-heading {
-    background: #3498DB;
+    background: #003161;
     height: 30%;
     text-align: center;
     padding: 8px;
@@ -23,7 +25,7 @@
 
 .todo-div {
     height: 30px;
-    background: #3498DB;
+    background: #567082;
     border-radius: 3px;
     padding: 5px;
     display: flex;
